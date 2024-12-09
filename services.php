@@ -1,13 +1,12 @@
 <?php
-// Include the database connection
-include_once "./db.php"; // Ensure the database connection is included at the start
+include_once "./db.php"; 
 
 // Fetch all services from the database
 $sql = "SELECT service_id, service_name, description, price, duration, image_url FROM Services";
 $result = $conn->query($sql);
 
 // Define filters and sorting options
-$service_types = ['Massage Therapy', 'Facial Treatment', 'Aromatherapy']; // Example categories
+$service_types = ['Massage Therapy', 'Facial Treatment', 'Aromatherapy'];
 $min_price = 0;
 $max_price = 5000;
 $min_duration = 30;
@@ -112,7 +111,7 @@ $max_duration = 120;
                         $description = $row['description'];
                         $price = $row['price'];
                         $duration = $row['duration'];
-                        $image_url = $row['image_url'] ? $row['image_url'] : 'default-image.jpg'; // Fallback image
+                        $image_url = $row['image_url'] ? $row['image_url'] : 'default-image.jpg';
 
                         echo "
                         <div class='service-card'>
