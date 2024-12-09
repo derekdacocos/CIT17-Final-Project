@@ -2,7 +2,7 @@
 include_once "./db.php";
 
 // Query the services table
-$sql = "SELECT service_name, description, price FROM Services";
+$sql = "SELECT service_name, description, price, image_url FROM Services";
 $result = $conn->query($sql);
 ?>
 
@@ -35,9 +35,11 @@ $result = $conn->query($sql);
                         $service_name = $row['service_name'];
                         $description = $row['description'];
                         $price = $row['price'];
+                        $image_url = $row['image_url'];
 
                         echo "
                         <div class='service-card'>
+                            <img src='$image_url' alt='$service_name'>
                             <h3>$service_name</h3>
                             <p>$description</p>
                             <p><strong>Price: ₱$price</strong></p>
