@@ -51,7 +51,8 @@ h2 {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     margin-top: 20px;
-    justify-items: center; /* Centers the items horizontally */
+    margin-bottom: 50px;
+    justify-items: center; 
 }
 
 .service-card {
@@ -61,8 +62,8 @@ h2 {
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease;
-    width: 100%; /* Ensures the card takes full width of its grid container */
-    max-width: 300px; /* Sets a maximum width for the service card */
+    width: 100%; 
+    max-width: 300px; 
 }
 
 .service-card:hover {
@@ -163,7 +164,6 @@ h2 {
     color: #555;
 }
 
-/* Optional: Styling for the scroll bar */
 .testimonial-slider::-webkit-scrollbar {
     height: 8px;
 }
