@@ -21,6 +21,9 @@ $result = $conn->query($sql);
         <div class="cta-buttons">
             <a href="booking.php" class="btn">Book Now</a>
             <a href="services.php" class="btn">View Services</a>
+            <!-- Login and Sign Up Buttons -->
+            <a href="login.php" class="btn">Login</a>
+            <a href="register.php" class="btn">Sign Up</a>
         </div>
     </header>
 
