@@ -14,7 +14,7 @@ $result = $conn->query($sql);
     <title>Home - Booking System</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home">
     <header class="hero">
         <h1>Your Wellness Journey Starts Here</h1>
         <p>Book your next session now!</p>
