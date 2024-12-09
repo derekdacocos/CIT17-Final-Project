@@ -91,7 +91,7 @@ $result = $conn->query($sql);
             <p>Join us today and experience the best therapy sessions.</p>
             <div class="cta-buttons">
                 <a href="register.php" class="cta-btn">Create an Account</a>
-                <a href="book.php" class="cta-btn">Book Your First Session</a>
+                <a href="booking.php" class="cta-btn">Book Your First Session</a>
             </div>
         </section>
 
