@@ -1,6 +1,12 @@
 <?php
 include_once "./db.php"; // Include the database connection
 
+// Predefined available time slots for each day
+$available_time_slots = [
+    '09:00:00', '10:00:00', '11:00:00', '12:00:00',
+    '13:00:00', '14:00:00', '15:00:00', '16:00:00'
+];
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $service_id = $_POST['service_id'];
@@ -10,8 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $payment_method = $_POST['payment_method'];
     $promo_code = $_POST['promo_code'] ?? '';
 
-    $sql = "INSERT INTO Appointments (user_id, therapist_id, service_id, appointment_date, start_time, status)
-            VALUES (1, '$therapist_id', '$service_id', '$date', '$time', 'pending')"; // Assuming user_id=1 for testing
+    // Calculate end time for the appointment (for simplicity, assuming the appointment duration is 1 hour)
+    $start_time = $time;
+    $end_time = date('H:i:s', strtotime($start_time . ' + 1 hour'));
+
+    // Insert the appointment into the database
+    $sql = "INSERT INTO Appointments (user_id, therapist_id, service_id, appointment_date, start_time, end_time, status)
+            VALUES (1, '$therapist_id', '$service_id', '$date', '$start_time', '$end_time', 'pending')"; // Assuming user_id=1 for testing
 
     if ($conn->query($sql) === TRUE) {
         $success = "Booking confirmed!";
@@ -38,6 +49,11 @@ if (isset($_GET['date'])) {
     // Return available time slots as JSON
     echo json_encode($time_slots);
     exit;
+}
+
+// Function to format the time to 12-hour AM/PM format
+function formatTime($time) {
+    return date("h:i A", strtotime($time)); // Convert to 12-hour format
 }
 ?>
 
@@ -105,7 +121,9 @@ if (isset($_GET['date'])) {
                 <label for="time">Time</label>
                 <select name="time" id="time" required>
                     <option value="">Select a Time</option>
-                    <!-- Time slots will be populated dynamically -->
+                    <?php foreach ($available_time_slots as $time_slot): ?>
+                        <option value="<?= $time_slot ?>"><?= formatTime($time_slot) ?></option>
+                    <?php endforeach; ?>
                 </select>
 
                 <button type="button" class="prev-btn" onclick="prevStep(1)">Back</button>
@@ -185,10 +203,36 @@ if (isset($_GET['date'])) {
                     }
                 });
         }
+
+        // Function to go to the next step
+        function nextStep(step) {
+            document.getElementById("step" + (step - 1)).classList.remove("active");
+            document.getElementById("step" + step).classList.add("active");
+
+            if (step === 3) {
+                updateConfirmation();
+            }
+        }
+
+        // Function to go back to the previous step
+        function prevStep(step) {
+            document.getElementById("step" + (step + 1)).classList.remove("active");
+            document.getElementById("step" + step).classList.add("active");
+        }
+
+        // Update the confirmation details
+        function updateConfirmation() {
+            var serviceSelect = document.getElementById("service");
+            var therapistSelect = document.getElementById("therapist");
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+
+            document.getElementById("confirm-service").textContent = serviceSelect.options[serviceSelect.selectedIndex].textContent;
+            document.getElementById("confirm-therapist").textContent = therapistSelect.options[therapistSelect.selectedIndex].textContent;
+            document.getElementById("confirm-date").textContent = date;
+            document.getElementById("confirm-time").textContent = time;
+            document.getElementById("confirm-price").textContent = "₱" + serviceSelect.options[serviceSelect.selectedIndex].getAttribute("data-price");
+        }
     </script>
 </body>
 </html>
-
-<?php
-$conn->close(); // Close the connection
-?>

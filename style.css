@@ -106,6 +106,8 @@ h2 {
     text-align: center;
     padding: 50px 20px;
     background-color: #f9f9f9;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
 }
 
 .testimonials h2 {
@@ -115,10 +117,13 @@ h2 {
 
 .testimonial-slider {
     display: flex;
-    overflow-x: scroll;
+    justify-content: center; /* Center the testimonials */
     gap: 20px;
     padding: 20px;
     scroll-snap-type: x mandatory;
+    max-width: 100%; /* Ensure it doesn't overflow the screen */
+    width: 80%; /* Adjust the width of the testimonial container */
+    overflow-x: auto; /* Make it scrollable horizontally */
 }
 
 .testimonial-card {

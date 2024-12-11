@@ -59,30 +59,50 @@ $result = $conn->query($sql);
         <section class="testimonials">
             <h2>Customer Reviews</h2>
             <div class="testimonial-slider">
-                <?php
-                // Fetch reviews from the database
-                $sql = "SELECT * FROM reviews JOIN users ON reviews.user_id = users.user_id";
-                $result = $conn->query($sql);
+                <!-- Static testimonials -->
+                <div class="testimonial-card">
+                    <div class="customer-info">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzbcRd8Hv5VQrwTl6vg1Nka55REaEC8oVSEQ&s" alt="Customer Photo" class="customer-photo">
+                        <div class="customer-details">
+                            <h4>John Vincent</h4>
+                            <p>Rating: 5/5</p>
+                        </div>
+                    </div>
+                    <p>"The therapy session was amazing, I feel rejuvenated!"</p>
+                </div>
 
-                if ($result->num_rows > 0) {
-                    // Display each review
-                    while ($row = $result->fetch_assoc()) {
-                        echo '
-                        <div class="testimonial-card">
-                            <div class="customer-info">
-                                <img src="' . (empty($row['profile_pic']) ? 'default-avatar.jpg' : $row['profile_pic']) . '" alt="Customer Photo" class="customer-photo">
-                                <div class="customer-details">
-                                    <h4>' . htmlspecialchars($row['full_name']) . '</h4>
-                                    <p>Rating: ' . htmlspecialchars($row['rating']) . '/5</p>
-                                </div>
-                            </div>
-                            <p>"' . htmlspecialchars($row['comment']) . '"</p>
-                        </div>';
-                    }
-                } else {
-                    echo '<p>No reviews available at the moment.</p>';
-                }
-                ?>
+                <div class="testimonial-card">
+                    <div class="customer-info">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAh4cljZKBW7mMA-sTlSHqXqhyHMcWZTF2mHzLWn2P4i1UBnkwnY8qmILEuOQRzzcb5BY&usqp=CAU" alt="Customer Photo" class="customer-photo">
+                        <div class="customer-details">
+                            <h4>Nagi Seishiro</h4>
+                            <p>Rating: 4/5</p>
+                        </div>
+                    </div>
+                    <p>"Very professional and effective. Highly recommend!"</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="customer-info">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD0HTICyAkwZM_BNoKuJ0mFE00qofHnDV3BA&s" alt="Customer Photo" class="customer-photo">
+                        <div class="customer-details">
+                            <h4>Emily Johnson</h4>
+                            <p>Rating: 5/5</p>
+                        </div>
+                    </div>
+                    <p>"I loved the service! The staff were friendly and attentive."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="customer-info">
+                        <img src="https://www.okayafrica.com/media-library/the-oh-my-god-wow-meme-came-from-the-film-azonto-ghost-this-is-a-still-photo-from-the-ghanaian-movie.png?id=17427713&width=1000&height=1000&quality=85&coordinates=326%2C0%2C0%2C0" alt="Customer Photo" class="customer-photo">
+                        <div class="customer-details">
+                            <h4>Kwame Boateng</h4>
+                            <p>Rating: 5/5</p>
+                        </div>
+                    </div>
+                    <p>"Oh my God! Wow!"</p>
+                </div>
             </div>
         </section>
 

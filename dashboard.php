@@ -38,7 +38,7 @@ $conn->close();
     <!-- Navbar -->
         <header class="navbar">
             <div class="navbar-container">
-                <h1 class="logo">Booking System</h1>
+                <h1 class="logo">User Dashboard</h1>
                 <nav class="nav-links">
                     <a href="dashboard.php" class="nav-item">Dashboard</a>
                     <a href="edit_profile.php" class="nav-item">Account Settings</a>
