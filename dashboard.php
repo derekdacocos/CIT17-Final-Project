@@ -32,81 +32,101 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard - Booking System</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <!-- Navbar -->
-    <div class="navbar">
-        <h1>Booking System</h1>
-        <a href="dashboard.php">Dashboard</a>
-        <a href="edit_profile.php">Account Settings</a>
-        <a href="logout.php">Logout</a>
-    </div>
+        <header class="navbar">
+            <div class="navbar-container">
+                <h1 class="logo">Booking System</h1>
+                <nav class="nav-links">
+                    <a href="dashboard.php" class="nav-item">Dashboard</a>
+                    <a href="edit_profile.php" class="nav-item">Account Settings</a>
+                    <a href="logout.php" class="nav-item">Logout</a>
+                </nav>
+            </div>
+        </header>
 
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <h3>Welcome, <?php echo htmlspecialchars($user['full_name']); ?></h3>
-            <ul>
-                <li><a href="dashboard.php">Dashboard</a></li>
-                <li><a href="edit_profile.php">Account Settings</a></li>
-                <li><a href="logout.php">Logout</a></li>
-            </ul>
-        </div>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome, <?php echo htmlspecialchars($user['full_name']); ?>!</h1>
+                <p class="hero-subtitle">Your wellness journey starts here. Manage your bookings and more below.</p>
+                <div class="cta-buttons">
+                    <a href="booking.php" class="btn btn-primary">Book Now</a>
+                    <a href="services.php" class="btn btn-secondary">View Services</a>
+                </div>
+            </div>
+        </section>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <h2>Your Dashboard</h2>
+        <!-- Services Section -->
+        <section class="services">
+            <h2>Your Bookings</h2>
+            <div class="services-grid">
+                <!-- Upcoming Appointments -->
+                <div class="service-card">
+                    <h3>Upcoming Appointments</h3>
+                    <?php if ($upcoming_appointments_result->num_rows > 0): ?>
+                        <ul>
+                            <?php while ($appointment = $upcoming_appointments_result->fetch_assoc()): ?>
+                                <li>
+                                    <p>Service: <?php echo htmlspecialchars($appointment['service_name']); ?></p>
+                                    <p>Date: <?php echo htmlspecialchars($appointment['appointment_date']); ?></p>
+                                    <a href="cancel_appointment.php?appointment_id=<?php echo $appointment['appointment_id']; ?>" class="btn">Cancel</a>
+                                    <a href="reschedule_appointment.php?appointment_id=<?php echo $appointment['appointment_id']; ?>" class="btn">Reschedule</a>
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p>No upcoming appointments.</p>
+                    <?php endif; ?>
+                </div>
 
-            <!-- Upcoming Appointments Section -->
-            <section class="appointments">
-                <h3>Upcoming Appointments</h3>
-                <?php if ($upcoming_appointments_result->num_rows > 0): ?>
-                    <ul>
-                        <?php while ($appointment = $upcoming_appointments_result->fetch_assoc()): ?>
-                            <li>
-                                <p>Service: <?php echo htmlspecialchars($appointment['service_name']); ?></p>
-                                <p>Date: <?php echo htmlspecialchars($appointment['appointment_date']); ?></p>
-                                <a href="cancel_appointment.php?appointment_id=<?php echo $appointment['appointment_id']; ?>">Cancel</a>
-                                <a href="reschedule_appointment.php?appointment_id=<?php echo $appointment['appointment_id']; ?>">Reschedule</a>
-                            </li>
-                        <?php endwhile; ?>
-                    </ul>
-                <?php else: ?>
-                    <p>No upcoming appointments.</p>
-                <?php endif; ?>
-            </section>
+                <!-- Past Appointments -->
+                <div class="service-card">
+                    <h3>Past Appointments</h3>
+                    <?php if ($past_appointments_result->num_rows > 0): ?>
+                        <ul>
+                            <?php while ($appointment = $past_appointments_result->fetch_assoc()): ?>
+                                <li>
+                                    <p>Service: <?php echo htmlspecialchars($appointment['service_name']); ?></p>
+                                    <p>Date: <?php echo htmlspecialchars($appointment['appointment_date']); ?></p>
+                                    <a href="leave_review.php?appointment_id=<?php echo $appointment['appointment_id']; ?>" class="btn">Leave a Review</a>
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+                    <?php else: ?>
+                        <p>No past appointments.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </section>
 
-            <!-- Past Appointments Section -->
-            <section class="appointments">
-                <h3>Past Appointments</h3>
-                <?php if ($past_appointments_result->num_rows > 0): ?>
-                    <ul>
-                        <?php while ($appointment = $past_appointments_result->fetch_assoc()): ?>
-                            <li>
-                                <p>Service: <?php echo htmlspecialchars($appointment['service_name']); ?></p>
-                                <p>Date: <?php echo htmlspecialchars($appointment['appointment_date']); ?></p>
-                                <a href="leave_review.php?appointment_id=<?php echo $appointment['appointment_id']; ?>">Leave a Review</a>
-                            </li>
-                        <?php endwhile; ?>
-                    </ul>
-                <?php else: ?>
-                    <p>No past appointments.</p>
-                <?php endif; ?>
-            </section>
+        <!-- Services Section -->
+        <section class="services-overview">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Massage Therapy</h3>
+                    <p>Relax your body and mind with our professional massage services.</p>
+                    <a href="booking.php?service=massage" class="btn">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <h3>Skin Care</h3>
+                    <p>Rejuvenate your skin with our personalized treatments.</p>
+                    <a href="booking.php?service=skincare" class="btn">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <h3>Yoga Classes</h3>
+                    <p>Find your balance and strength with our yoga sessions.</p>
+                    <a href="booking.php?service=yoga" class="btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-            <!-- Account Settings Section -->
-            <section class="account-settings">
-                <h3>Account Settings</h3>
-                <p><strong>Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-                <p><strong>Phone:</strong> <?php echo htmlspecialchars($user['phone_number']); ?></p>
-                <a href="edit_profile.php" class="btn">Edit Profile</a>
-                <a href="change_password.php" class="btn">Change Password</a>
-            </section>
-        </div>
-    </div>
-
+    <footer>
+        <p>&copy; 2024 Booking System. All rights reserved.</p>
+    </footer>
 </body>
 </html>

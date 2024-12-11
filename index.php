@@ -19,11 +19,9 @@ $result = $conn->query($sql);
         <h1>Your Wellness Journey Starts Here</h1>
         <p>Book your next session now!</p>
         <div class="cta-buttons">
-            <a href="booking.php" class="btn">Book Now</a>
-            <a href="services.php" class="btn">View Services</a>
+            <a href="login.php" class="btn btn-primary">Book Now</a>
             <!-- Login and Sign Up Buttons -->
-            <a href="login.php" class="btn">Login</a>
-            <a href="register.php" class="btn">Sign Up</a>
+            <a href="register.php" class="btn btn-secondary">Sign Up</a>
         </div>
     </header>
 
